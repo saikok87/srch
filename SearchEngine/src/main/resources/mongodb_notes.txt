@@ -1,0 +1,83 @@
+-------------- MongoDB tutorial
+https://docs.mongodb.com/manual/tutorial/
+
+
+>>> changing storageengine to mmapv1 as windows is 32 bit and creating mongodb database 
+
+C:\Program Files\MongoDB\Server\3.2\bin>mongod --storageEngine=mmapv1 --dbpath=D:\mongodb\data\db
+
+>> installing config file
+C:\Program Files\MongoDB\Server\3.2\bin>mongod --storageEngine=mmapv1 --config "C:\Program Files\MongoDB\Server\3.2\mongod.cfg" --install
+
+>> create a file at C:\Program Files\MongoDB\Server\3.2\mongod.cfg that specifies both systemLog.path and storage.dbPath
+
+>>
+D:\mongodb
+>> mongod --config "D:\mongodb\mongod.cfg" --install
+
+
+>> create mongodb service
+
+sc.exe create MongoDB binPath= "C:\Program Files\MongoDB\Server\3.2\bin\mongod.exe --service --config=\"D:\mongodb\mongod.cfg\"" DisplayName= "MongoDB" start= "auto"
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+1st coammand to run is connect to storage
+
+C:\Program Files\MongoDB\Server\3.2\bin>mongod --storageEngine=mmapv1 --dbpath=c:\data\db
+
+then open another command prompt and -
+2nd command>>>>
+C:\Program Files\MongoDB\Server\3.2\bin>mongo
+
+3rd command >>>>
+mongod --config "C:\data\mongod.cfg" --install
+
+or
+
+mongod --logpath c:\data\logs\mongod.log --dbpath c:\data\db --directoryperdb --install
+
+--------------------------------- mongodb shell commands / tutorials <<<<<<<<<<<< vip
+http://www.hacksparrow.com/the-mongodb-tutorial.html
+
+----------------------------------- unclean mongo shutdown
+mongod --repair
+
+----------------------------------- 
+- querying collection
+db.user.find()
+
+- insert data to collection
+
+db.user.insert(
+   {
+      name: "nilesh2",
+      age: 25,
+      createdDate: new Date()
+   }
+)
+
+- truncate collection
+
+db.user.remove();
+
+- remove particular record
+
+db.user.remove({name:'nilesh2'})
+
+------------------------------------------ mongo basics
+
+MongoDB is a document-oriented database system (a kind of NoSQL) made up of the hierarchy of database > collection > document > field > key:value. 
+Here is an approximate comparison between MongoDB and SQL data models.
+
+MongoDB : SQL
+---------------------
+database : database
+collection : table
+document : row
+field : -
+{key:value} : -
+
+
