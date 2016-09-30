@@ -27,6 +27,12 @@
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler />
 	
+	<bean id="solrHelper" class="com.infy.solr.helper.SolrDaoHelper">
+	   <constructor-arg>
+			<value>http://localhost:8983/solr/tweetcollection</value>
+		</constructor-arg>
+	</bean>
+	
 	<!-- <bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreResourceNotFound" value="false" />

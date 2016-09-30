@@ -5,7 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
+import org.springframework.stereotype.Component;
 
+@Component
 public final class SolrServerFactory {
 	Map<String,HttpSolrServer> urlToServer =  new ConcurrentHashMap<String, HttpSolrServer>();
 	static SolrServerFactory instance = new SolrServerFactory();

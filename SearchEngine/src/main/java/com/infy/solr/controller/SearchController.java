@@ -5,6 +5,7 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
 
 import com.infy.solr.constants.AppConstants;
@@ -14,6 +15,7 @@ import com.infy.solr.model.MongoInputData;
 import com.infy.solr.model.SearchData;
 import com.infy.solr.model.SearchResponse;
 
+@Component
 public class SearchController extends SpringBeanAutowiringSupport implements ISearchController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(SearchController.class);

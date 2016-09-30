@@ -11,6 +11,8 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.infy.solr.constants.AppConstants;
 import com.infy.solr.dao.MongoTweeterDao;
@@ -22,11 +24,14 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoClient;
 
+@Component
 public class SolrDaoProcessing {
 	
 	@Autowired
 	private MongoTweeterDao mongoTweeterDao;
 	
+	
+	@Qualifier("solrHelper")
 	@Autowired
 	private SolrDaoHelper<SolrTweeterDTO> solrDao;
 	
@@ -45,13 +50,13 @@ public class SolrDaoProcessing {
 			
 			Collection<SolrTweeterDTO> solrTweeterDTOs = new ArrayList<SolrTweeterDTO>();
 			
-			solrDao = (SolrDaoHelper<SolrTweeterDTO>) contextDTO.get(AppConstants.SOLR_DAO);
+			//solrDao = (SolrDaoHelper<SolrTweeterDTO>) contextDTO.get(AppConstants.SOLR_DAO);
 			
 			while(cursor.hasNext()) {
 				BasicDBObject record = (BasicDBObject) cursor.next(); 
 				System.out.println("Mongo record: " + record.toString());
 				
-				solrTweeterDTOs.add(new SolrTweeterDTO(record.get(mongoTweeterDao.get_id()).toString(), record.get(mongoTweeterDao.getTweetData()).toString()));
+				solrTweeterDTOs.add(new SolrTweeterDTO(record.get("_id").toString(), record.get("tweetData").toString()));
 				contextDTO.put(AppConstants.TWEET_FEED, solrTweeterDTOs);
 				contextDTO = solrDao.put(contextDTO);
 			}

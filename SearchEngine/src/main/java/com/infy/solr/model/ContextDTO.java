@@ -3,6 +3,9 @@ package com.infy.solr.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class ContextDTO {
 	
 	private Map<String, Object> contextMap;

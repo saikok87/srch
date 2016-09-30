@@ -1,7 +1,9 @@
 package com.infy.solr.model;
 
 import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SolrTweeterDTO {
 	
 	@Field("id")

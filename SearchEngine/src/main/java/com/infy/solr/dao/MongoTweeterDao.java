@@ -1,6 +1,8 @@
 package com.infy.solr.dao;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class MongoTweeterDao {
 	
 	private String _id;

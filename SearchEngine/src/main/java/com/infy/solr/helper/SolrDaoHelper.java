@@ -18,16 +18,21 @@ import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
+import org.springframework.stereotype.Component;
 
 import com.infy.solr.constants.AppConstants;
 import com.infy.solr.model.ContextDTO;
 import com.infy.solr.model.SolrTweeterDTO;
 import com.infy.solr.util.SolrServerFactory;
 
+
 public class SolrDaoHelper<T> {
 
 	HttpSolrServer server = null;
 
+	public SolrDaoHelper() {
+	}
+	
 	public SolrDaoHelper(String solrURL) {
 		server = (HttpSolrServer) SolrServerFactory.getInstance().createServer(
 				solrURL);
