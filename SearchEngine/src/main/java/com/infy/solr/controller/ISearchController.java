@@ -22,5 +22,4 @@ public interface ISearchController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response MongoInsertion(MongoInputData mongoInputData);
 	
-
 }

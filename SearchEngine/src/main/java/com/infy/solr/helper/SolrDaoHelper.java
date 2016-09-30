@@ -19,6 +19,8 @@ import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.SolrInputDocument;
 
+import com.infy.solr.constants.AppConstants;
+import com.infy.solr.model.ContextDTO;
 import com.infy.solr.model.SolrTweeterDTO;
 import com.infy.solr.util.SolrServerFactory;
 
@@ -32,21 +34,26 @@ public class SolrDaoHelper<T> {
 		configureSolr(server);
 	}
 
-	public void put(T dao) {
+	/*public void put(T dao) {
 		put(createSingletonSet(dao));
-	}
+	}*/
 
-	public void put(Collection<T> dao) {
+	public ContextDTO put(ContextDTO contextDTO) {
+		
 		try {
-			UpdateResponse rsp = server.addBeans(dao);
-			System.out.println("Added Movies to solr. Time taken = "
+			Collection<SolrTweeterDTO> solrTweeterDTOs = (Collection<SolrTweeterDTO>) contextDTO.get(AppConstants.TWEET_FEED);
+			
+			UpdateResponse rsp = server.addBeans(solrTweeterDTOs);
+			System.out.println("Added TweeterFeed to solr. Time taken = "
 					+ rsp.getElapsedTime() + ". " + rsp.toString());
+			contextDTO.put(AppConstants.SOLR_RESPONSE, rsp);
 			
 		} catch (SolrServerException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return contextDTO;
 
 	}
 	

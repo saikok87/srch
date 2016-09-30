@@ -12,6 +12,7 @@ import com.infy.solr.facade.SearchServicesFacade;
 import com.infy.solr.model.ContextDTO;
 import com.infy.solr.model.MongoInputData;
 import com.infy.solr.model.SearchData;
+import com.infy.solr.model.SearchResponse;
 
 public class SearchController extends SpringBeanAutowiringSupport implements ISearchController {
 	
@@ -26,9 +27,11 @@ public class SearchController extends SpringBeanAutowiringSupport implements ISe
 		
 		ContextDTO contextDTO = new ContextDTO();
 		contextDTO.put(AppConstants.SOLR_SEARCH_INPUT, searchData);
-		searchServicesFacade.doSolrSearching(contextDTO);
+		contextDTO = searchServicesFacade.doSolrSearching(contextDTO);
 		
-		return null;
+		response = Response.ok((contextDTO.get(AppConstants.SOLR_RESPONSE)).toString()).build();
+		
+		return response;
 	}
 
 	@Override
