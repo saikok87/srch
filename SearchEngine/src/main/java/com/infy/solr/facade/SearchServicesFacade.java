@@ -1,7 +1,6 @@
 package com.infy.solr.facade;
 
 
-
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collection;
