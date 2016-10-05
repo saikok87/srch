@@ -30,7 +30,6 @@ public class SolrDaoProcessing {
 	@Autowired
 	private MongoTweeterDao mongoTweeterDao;
 	
-	
 	@Qualifier("solrHelper")
 	@Autowired
 	private SolrDaoHelper<SolrTweeterDTO> solrDao;
@@ -44,13 +43,11 @@ public class SolrDaoProcessing {
 			DBCollection table = db.getCollection("tweets");
 			
 			BasicDBObject searchQuery = new BasicDBObject();
-			//searchQuery.put("name", "sai");
 			
 			DBCursor cursor = table.find();
 			
 			Collection<SolrTweeterDTO> solrTweeterDTOs = new ArrayList<SolrTweeterDTO>();
 			
-			//solrDao = (SolrDaoHelper<SolrTweeterDTO>) contextDTO.get(AppConstants.SOLR_DAO);
 			
 			while(cursor.hasNext()) {
 				BasicDBObject record = (BasicDBObject) cursor.next(); 
@@ -61,7 +58,6 @@ public class SolrDaoProcessing {
 				contextDTO = solrDao.put(contextDTO);
 			}
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -101,18 +97,24 @@ public class SolrDaoProcessing {
 		
 	}
 	
-	public void readHighLightedPage(SolrDaoHelper<SolrTweeterDTO> solrDao) {
+	public ContextDTO readHighLightedPage(ContextDTO contextDTO) {
 		try {
-			List<SolrTweeterDTO> usersList = solrDao.testHighlightAndPagination(1,14); // passing pageNum=1 and no. of rows/page=14
-			for(SolrTweeterDTO user : usersList) {
-				System.out.println("id: " + user.getId());
-				System.out.println("TweeterData: " + user.getTweeterData());
-				
+			
+			List<SolrTweeterDTO> tweetList = solrDao.testHighlightAndPagination(1,14); // passing pageNum=1 and no. of rows/page=14
+			
+			for(SolrTweeterDTO tweets : tweetList) {
+				System.out.println("id: " + tweets.getId());
+				System.out.println("TweeterData: " + tweets.getTweeterData());
 			}
+			
+			contextDTO.put(AppConstants.TWEET_LIST, tweetList);
+			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
+		
+		
+		return contextDTO;	
 	}
 
 	public void addDocuments(SolrDaoHelper<SolrTweeterDTO> solrDao) {

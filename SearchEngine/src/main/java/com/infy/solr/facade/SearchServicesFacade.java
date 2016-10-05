@@ -46,20 +46,18 @@ public class SearchServicesFacade {
 	
 	public ContextDTO doSolrSearching(ContextDTO contextDTO) {
 		System.out.println("Starting off " + this.getClass().toString());
-		//solrDao = new SolrDaoHelper<SolrTweeterDTO> (solrURL);
-		
-		//contextDTO.put(AppConstants.SOLR_DAO, solrDao);
-		
-		contextDTO = solrDaoProcessing.readMongoAndIndexSolr(contextDTO); // read mongo data and add it to solr Index
-		//readHighLightedPage(solrDao); // read solr searched result in highlighted format + pagination
+		contextDTO = solrDaoProcessing.readHighLightedPage(contextDTO); // read solr searched result in highlighted format + pagination
 		 
-	    //addDocuments (solrDao);
-        //readDocuments (solrDao); // to read useres in sorted order of id
-        
-        // addSolrTweeterDTOs (solrDao);
-        // readSolrTweeterDTOs (solrDao); 
-        
+	    return contextDTO;
+	}
+	
+	public ContextDTO doSolrIndexing(ContextDTO contextDTO) {
+		
+		System.out.println("Starting off " + this.getClass().toString());
+		contextDTO = solrDaoProcessing.readMongoAndIndexSolr(contextDTO); // read mongo data and add it to solr Index
+		
 		return contextDTO;
+		
 	}
 	
 	
