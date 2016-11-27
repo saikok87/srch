@@ -33,17 +33,18 @@
 		</constructor-arg>
 	</bean>
 	
-	<!-- <bean id="propertyConfigurer"
+	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="ignoreResourceNotFound" value="false" />
 		<property name="ignoreUnresolvablePlaceholders" value="true" />
 		<property name="locations">
 			<list>
-				<value>classpath:/config/HBase-${environment:local}.properties</value>
+				<!-- <value>classpath:/config/HBase-${environment:local}.properties</value>
 				<value>classpath:/config/DAO-${environment:local}.properties</value>
-				<value>classpath:/config/LinkedIn-${environment:local}.properties</value>
+				<value>classpath:/config/LinkedIn-${environment:local}.properties</value> -->
+				<value>classpath:/config/my.properties</value>
 			</list>
 		</property>
-	</bean> -->
+	</bean> 
 	
 </beans>

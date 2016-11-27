@@ -14,8 +14,9 @@ import com.infy.solr.constants.AppConstants;
 import com.infy.solr.facade.SearchServicesFacade;
 import com.infy.solr.model.ContextDTO;
 import com.infy.solr.model.MongoInputData;
+//import com.infy.solr.model.MyClass;
+import com.infy.solr.model.MyProperties;
 import com.infy.solr.model.SearchData;
-import com.infy.solr.model.SearchResponse;
 import com.infy.solr.model.SolrTweeterDTO;
 
 @Component
@@ -25,6 +26,12 @@ public class SearchController extends SpringBeanAutowiringSupport implements ISe
 	
 	@Autowired
 	private SearchServicesFacade searchServicesFacade;
+	
+	/*@Autowired
+	private MyClass myClass;*/
+	
+	@Autowired
+	private MyProperties myProperties;
 	
 	@Override
 	public List<SolrTweeterDTO> solrSearch(SearchData searchData) {
@@ -56,6 +63,14 @@ public class SearchController extends SpringBeanAutowiringSupport implements ISe
 		response = Response.ok((contextDTO.get(AppConstants.SOLR_RESPONSE)).toString()).build();
 		
 		return response;
+	}
+
+	@Override
+	public String test() {
+		//String str = searchServicesFacade.testStr();
+		//String str = (String) myClass.getMyProperties().get("my.property.name");
+				
+		return myProperties.getName();
 	}
 			
 }
